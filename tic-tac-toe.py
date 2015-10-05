@@ -1,21 +1,23 @@
+#!/usr/bin/env python
+
 """
-A very basic Tic-Tac-Toe solver that makes use of the Minimax algorithm
+A very basic Tic-Tac-Toe solver
+
+This very basic program makes use of the Minimax algorithm to find the best move
 """
 
-##############################################################################  
+################################################################################  
 # Imports
 
 import copy
 from collections import deque
 
-
-
-##############################################################################  
+################################################################################  
 # Constant definitions
 
 PLY_DEPTH = 6
 
-##############################################################################  
+################################################################################  
 # Function definitions
 
 class GameState:
@@ -124,7 +126,7 @@ def minimax(state, ply, player, opponent, original_player):
     return best
 
 
-##############################################################################  
+################################################################################
 # Main program starts here
 
 state = GameState(['X',' ',' ', ' ','X',' ', ' ',' ','O'], 'X')
@@ -139,6 +141,4 @@ while True:
     state = bestMove(state, player, opponent)
     if state == None:
         break   
-
-
 
