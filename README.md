@@ -1,2 +1,2 @@
 # Tic-Tac-Toe
-An easy tic-tac-toe solver using the minimax algorithm
+An easy Tic-Tac-Toe solver using the MINIMAX algorithm
