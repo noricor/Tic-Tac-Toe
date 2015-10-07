@@ -3,19 +3,18 @@
 """
 A very basic Tic-Tac-Toe solver
 
-This very basic program makes use of the Minimax algorithm to find the best move
+This very basic program makes use of the negmax algorithm to find the best move
 """
 
 ################################################################################  
 # Imports
 
 import copy
-from collections import deque
 
 ################################################################################  
 # Constant definitions
 
-PLY_DEPTH = 6
+PLY_DEPTH = 8
 
 ################################################################################  
 # Function definitions
@@ -107,29 +106,25 @@ class GameState:
         
 def bestMove(state, player, opponent):
     original_player = player
-    move, score = minimax(state, PLY_DEPTH, player, opponent, original_player)
+    move, score = negmax(state, PLY_DEPTH, player, opponent)
     return move
 
-def minimax(state, ply, player, opponent, original_player):
+def negmax(state, ply, player, opponent):
     best = (None, None)
     if ply==0 or state.isFinal():
-        score = state.getScore(original_player)
+        score = state.getScore(player)
         return [None, score]
     for next_state in state.getNextStates(player):
-        move, score = minimax(next_state, ply-1, opponent, player, original_player)
-        if player == original_player:
-            if best[1]==None or score > best[1]:
-                best = (next_state, score)
-        else:
-            if best[1]==None or score < best[1]:
-                best = (next_state, score)              
+        move, score = negmax(next_state, ply-1, opponent, player)
+        if best[1]==None or (score*-1 > best[1]):
+            best = (next_state, score*-1)
     return best
-
 
 ################################################################################
 # Main program starts here
 
 state = GameState(['X',' ',' ', ' ','X',' ', ' ',' ','O'], 'X')
+state = GameState([' ',' ',' ', ' ',' ',' ', 'O',' ',' '], 'O')
 
 while True: 
 
